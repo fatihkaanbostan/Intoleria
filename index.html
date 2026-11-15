@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intoleria | Meal planning and grocery shopping for celiac households</title>
+<meta name="description" content="A mobile app that helps celiac households find gluten-free products with confidence, build a weekly meal plan and prepare a shopping list (in development).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#1a3a9b;--bg:#FBF8F3;--amber:#138b9b;--mut:#4A5B52;--line:#d2dde4;--tint:#E6EFE9}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:#17231D;line-height:1.6}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;margin:0;line-height:1.15;letter-spacing:-.01em}
+h2{font-size:clamp(28px,3.6vw,42px)}h3{font-size:21px}
+p{margin:0}a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;z-index:5;background:rgba(251,248,243,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.nav nav{display:flex;gap:22px;font-size:14px;font-weight:500;color:#33443B}
+.nav nav a:hover{color:var(--brand)}
+.logo{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--brand)}
+.logo-img{height:50px;width:auto;vertical-align:middle;margin-right:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 24px;border-radius:999px;font-weight:600;font-size:15px;border:0;cursor:pointer;font-family:inherit}
+.btn-p{background:var(--brand);color:#fff}.btn-p:hover{background:#163A2B}
+.btn-s{border:1.5px solid var(--brand);color:var(--brand)}.btn-s:hover{background:var(--tint)}
+.sec{padding:84px 0}.alt{background:#fff}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.lead{font-size:18px;color:var(--mut);max-width:680px;margin-top:16px}
+.g2,.g3,.g4,.g5{display:grid;gap:22px;margin-top:40px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px}
+.alt .card{background:var(--bg)}
+.card h3{margin:14px 0 8px}.card p,.card li{color:var(--mut);font-size:15px}
+.num{width:38px;height:38px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.pill{display:inline-block;background:var(--tint);color:var(--brand);font-size:13px;font-weight:600;padding:6px 14px;border-radius:999px;margin-bottom:20px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:56px 0 76px}
+.notice{background:#FCE9CF;color:#6B3A08;font-size:14px;text-align:center;padding:10px 16px}
+.phone{width:300px;background:#fff;border-radius:32px;padding:22px;box-shadow:0 24px 60px rgba(31,77,58,.18)}
+.row{display:flex;justify-content:space-between;gap:8px;padding:12px 0;border-bottom:1px solid #EEE9DE;font-size:14px}
+.tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap;display:inline-block}
+.ok{background:#DDF0E3;color:#17603A}.warn{background:#FCE9CF;color:#8A4A0B}.no{background:#F8DEDA;color:#8C2A1C}.gray{background:#EEE9DE;color:#4A5B52}
+.dark{background:var(--brand);color:#F3F7F4;border-radius:32px;padding:64px 48px}
+.dark .card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+.dark .card p{color:#CFE0D5}
+.stat{font-family:'Fraunces',serif;font-size:46px;font-weight:600;color:var(--brand);line-height:1}
+.src{font-size:12.5px;color:#5B6B63;margin-top:12px}
+.pend{border:2px dashed #CFC8B8;border-radius:22px;padding:28px;background:#fff;color:var(--mut);font-size:15px}
+.tw{overflow-x:auto;margin-top:36px;border:1px solid var(--line);border-radius:18px;background:#fff}
+table{border-collapse:collapse;width:100%;min-width:700px;font-size:14.5px}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid #EEE9DE;vertical-align:top}
+th{background:var(--tint);color:var(--brand)}
+.bmc{display:grid;grid-template-columns:repeat(10,1fr);grid-template-areas:"pa pa ac ac va va cr cr cs cs" "pa pa re re va va ch ch cs cs" "co co co co co rv rv rv rv rv";gap:12px;margin-top:40px}
+.bmc div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.bmc h3{font-size:16px;margin-bottom:8px;color:var(--brand)}.bmc p{font-size:13.5px;color:var(--mut)}
+.stage{border-top:3px solid var(--line);padding-top:18px}.stage.on{border-color:var(--amber)}
+.refs{font-size:13.5px;color:#4A5B52;padding-left:18px}.refs li{margin-bottom:6px}
+footer{border-top:1px solid var(--line);padding:32px 0;color:#5B6B63;font-size:13.5px}
+@media(max-width:980px){.nav nav{display:none}.hero,.g2,.g3,.g4,.g5{grid-template-columns:1fr}.bmc{grid-template-columns:1fr;grid-template-areas:none}.bmc div{grid-area:auto!important}.dark{padding:40px 22px}}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px;margin-top:44px}
+.step h3{font-size:20px;margin:14px 0 6px;color:#fff}.step>p{color:#CFE0D5;font-size:15px;margin-bottom:18px;min-height:46px}
+.step .num{background:#F3C77E;color:#17231D}
+.scr{width:100%;max-width:250px;min-height:430px;margin:0 auto;background:var(--bg);color:#17231D;border:6px solid #0E2A1E;border-radius:30px;padding:16px 14px;font-size:12.5px;line-height:1.4;display:flex;flex-direction:column;gap:8px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.scr .t{font-weight:700;font-size:15px}.scr .sub{font-size:11px;color:#5B6B63}
+.scr .box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 10px}
+.scr .r{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.chip{display:inline-block;background:var(--tint);color:var(--brand);border-radius:99px;padding:2px 9px;font-size:11px;font-weight:600;margin:2px 2px 0 0}
+.scr .tag{font-size:10px;padding:2px 7px}
+.scr .btn{min-height:36px;font-size:12.5px;padding:0 14px;margin-top:auto;width:100%}
+.bar{height:8px;background:#EEE9DE;border-radius:99px}.bar i{display:block;height:100%;background:var(--brand);border-radius:99px}
+.chk{width:14px;height:14px;border:1.5px solid var(--brand);border-radius:4px;flex:none;display:inline-block;margin-right:7px;vertical-align:-3px}
+.chk.on{background:var(--brand)}
+.lock{opacity:.55}
+.demo{font-size:11px;color:#CFE0D5;text-align:center;margin-top:12px}
+@media(max-width:980px){.steps{grid-template-columns:1fr}.step>p{min-height:0}}
+</style>
+</head>
+<body>
+<div class="notice">Intoleria is currently at the concept and development stage. The screens shown are sample designs.</div>
+<header><div class="wrap nav">
+<!-- LOGO: put your PNG next to this file as logo.png (or change the src). It stays hidden until the file exists. -->
+<a class="logo" href="#"><img class="logo-img" src="logo.png" alt="Intoleria logo" onerror="this.style.display='none'">Intoleria</a>
+<nav aria-label="Main menu"><a href="#sorun">Problem</a><a href="#cozum">Solution</a><a href="#fark">Difference</a><a href="#nasil">How it works</a><a href="#musteri">Customers</a><a href="#veri">Data</a><a href="#bmc">Business model</a></nav>
+<!-- TODO: write the crowdfunding campaign link into the href -->
+<a class="btn btn-p" href="#destek">Support the project</a>
+</div></header>
+
+<div class="wrap hero">
+<div>
+<span class="pill">For celiac households</span>
+<h1 style="font-size:clamp(38px,5.4vw,62px)">Gluten-free shopping no longer has to be exhausting.</h1>
+<p class="lead">Intoleria is a mobile app that helps households living with a celiac family member find gluten-free products with confidence, build a budget-friendly weekly meal plan and prepare their shopping list.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px"><a class="btn btn-p" href="#destek">Support the project</a><a class="btn btn-s" href="#nasil">How does it work?</a></div>
+</div>
+<div style="background:var(--tint);border-radius:32px;padding:34px;display:flex;justify-content:center">
+<div class="phone">
+<div style="font-weight:700;font-size:17px">This week's plan</div>
+<div style="font-size:13px;color:#5B6B63;margin-bottom:8px">Profile: Celiac + Lactose · Sample screen</div>
+<div class="row"><span>Mon · Lentil soup</span><span class="tag ok">Verified</span></div>
+<div class="row"><span>Tue · Oven chicken, rice</span><span class="tag ok">Verified</span></div>
+<div class="row"><span>Wed · Pasta</span><span class="tag warn">Insufficient info</span></div>
+<div class="row"><span>Thu · Sandwich</span><span class="tag no">Not suitable</span></div>
+<div style="margin-top:16px;font-size:13px;font-weight:600">Weekly budget</div>
+<div style="height:10px;background:#EEE9DE;border-radius:99px;margin-top:8px"><div style="width:62%;height:100%;background:var(--brand);border-radius:99px"></div></div>
+<div class="btn btn-p" style="width:100%;margin-top:18px;min-height:42px;font-size:14px">Open shopping list</div>
+</div></div>
+</div>
+
+<section class="sec alt" id="sorun"><div class="wrap">
+<div class="eyebrow">Problem</div>
+<h2 style="max-width:760px">A lifelong diet, scattered information and high costs.</h2>
+<div class="g4">
+<div class="card"><h3>Trust</h3><p>Because of hidden gluten and cross-contamination risk, product labels have to be read carefully. Interpreting warnings such as "may contain traces of gluten" is left to the household.</p></div>
+<div class="card"><h3>Cost</h3><p>Gluten-free alternatives are often more expensive than their regular equivalents and are not available in every supermarket.</p></div>
+<div class="card"><h3>Effort</h3><p>Finding recipes, searching for suitable products, comparing prices and preparing a shopping list are all done in separate tools.</p></div>
+<div class="card"><h3>Menu fatigue</h3><p>Because options are limited, the question "What should I cook today?" becomes a source of stress every day.</p></div>
+</div>
+</div></section>
+
+<section class="sec" id="cozum"><div class="wrap">
+<div class="eyebrow">Solution</div>
+<h2 style="max-width:760px">We make the weekly meal and shopping safe, affordable and effortless.</h2>
+<div class="g3" style="grid-template-columns:repeat(2,2fr)">
+<div class="card"><div class="num">1</div><h3>Dietary profile</h3><p>Restrictions such as celiac disease and lactose intolerance; a separate profile for each household member.</p></div>
+<div class="card"><div class="num">2</div><h3>Recipes and weekly plan</h3><p>Recipes that fit the profile and a weekly meal plan.</p></div>
+<div class="card"><div class="num">3</div><h3>Product matching</h3><p>Recipe ingredients are matched with suitable products. Products are classified as "verified", "not suitable" or "insufficient info"; a product with missing information is not considered safe.</p></div>
+<div class="card"><div class="num">4</div><h3>List and budget</h3><p>Shopping list and budget tracking.</p></div>
+</div>
+<p class="lead" style="max-width:none">Next stages: live price and stock comparison across supermarkets, the most economical basket, automatic cart transfer, at-home product and food waste tracking, restaurant guide. The first app to combine barcode-based inventory checks, virtual fridge stock tracking, and personalized meal planning all in one assistant. Barcode scanning is the future of this product and is planned for upcoming versions.</p>
+</div></section>
+
+<section class="sec alt" id="fark"><div class="wrap">
+<div class="eyebrow">Value proposition and competitors</div>
+<h2 style="max-width:780px">Existing solutions focus on one part of the process. We combine all of it for the household.</h2>
+<p class="lead">Product scanning, price comparison and online sales sit in separate places. Our difference is connecting product suitability to the weekly meal and shopping plan.</p>
+<div class="tw"><table>
+<thead><tr><th>Feature</th><th>Fig</th><th>Özel Beslenme</th><th>marketfiyati.org.tr</th><th>Our idea</th></tr></thead>
+<tbody>
+<tr><td>Diet and allergen check</td><td>✓ (barcode scan, 2,800+ restrictions)</td><td>Partial (browse gluten-free, vegan and similar categories)</td><td>– (none found)</td><td>✓</td></tr>
+<tr><td>Profiles for each household member</td><td>✓ (profile for everyone; multiple profiles are part of paid Fig+)</td><td>–</td><td>–</td><td>✓</td></tr>
+<tr><td>Video recipes from home ingredients</td><td>–</td><td>–</td><td>–</td><td>✓</td></tr>
+<tr><td>Weekly meal plan within a budget</td><td>–</td><td>–</td><td>–</td><td>✓</td></tr>
+<tr><td>Food waste reduction</td><td>–</td><td>–</td><td>–</td><td>✓</td></tr>
+<tr><td>Shopping list or basket</td><td>✓ (shopping lists)</td><td>✓ (cart for its own store, order tracking)</td><td>–</td><td>✓</td></tr>
+</tbody></table></div>
+<p class="src">Competitor information is based on public promotional materials; app tests are ongoing.</p>
+</div></section>
+
+<section class="sec" id="nasil"><div class="wrap"><div class="dark"><div class="eyebrow" style="color:#F3C77E">How it works</div><h2 style="max-width:620px">Six steps from profile to shopping list.</h2><div class="steps"><div class="step"><div class="num">1</div><h3>Create your household profile</h3><p>Enter dietary needs such as celiac disease and lactose intolerance.</p><div class="scr" role="img" aria-label="Sample app screen: Create your household profile"><div class="t">Household profile</div><div class="sub">Who are we planning for?</div>
+<div class="box"><div class="r"><b>Ayşe</b><span class="sub">Parent</span></div><span class="chip">No restriction</span></div>
+<div class="box"><div class="r"><b>Efe</b><span class="sub">Child</span></div><span class="chip">Celiac</span><span class="chip">Lactose</span></div>
+<div class="box"><div class="r"><b>Mehmet</b><span class="sub">Parent</span></div><span class="chip">No restriction</span></div>
+<div class="box" style="border-style:dashed;text-align:center;color:var(--brand);font-weight:600">+ Add member</div>
+<div class="btn btn-p">Continue</div></div></div><div class="step"><div class="num">2</div><h3>Set your preferences</h3><p>Add your weekly budget, household size and the ingredients you have at home.</p><div class="scr" role="img" aria-label="Sample app screen: Set your preferences"><div class="t">Preferences</div><div class="sub">Let's set up the plan for you</div>
+<div class="box"><div class="sub">Weekly budget</div><div class="r"><b style="font-size:16px">₺ 0.000</b><span class="sub">sample</span></div></div>
+<div class="box"><div class="sub">Household size</div><div class="r"><b style="font-size:16px">3 people</b><span class="sub">− &nbsp; +</span></div></div>
+<div class="box"><div class="sub">Ingredients at home</div><span class="chip">Rice</span><span class="chip">Lentils</span><span class="chip">Eggs</span><span class="chip">+ Add</span></div>
+<div class="btn btn-p">Create plan</div></div></div><div class="step"><div class="num">3</div><h3>Get menu suggestions</h3><p>Suitable recipes and a weekly meal plan are prepared for you.</p><div class="scr" role="img" aria-label="Sample app screen: Get menu suggestions"><div class="t">Weekly plan</div><div class="sub">Celiac + Lactose compatible</div>
+<div class="box"><div class="sub">Monday</div><b>Lentil soup</b></div>
+<div class="box"><div class="sub">Tuesday</div><b>Oven chicken, rice pilaf</b></div>
+<div class="box"><div class="sub">Wednesday</div><b>Vegetable omelette</b></div>
+<div class="box"><div class="sub">Thursday</div><b>Borlotti beans in olive oil</b></div>
+<div class="btn btn-p">View recipe</div></div></div><div class="step"><div class="num">4</div><h3>Check product suitability</h3><p>Ingredients are matched with product information; unverified products are clearly marked.</p><div class="scr" role="img" aria-label="Sample app screen: Check product suitability"><div class="t">Product check</div><div class="sub">Wednesday · Vegetable omelette</div>
+<div class="box"><div class="r"><span>Product A (eggs)</span><span class="tag ok">Verified</span></div></div>
+<div class="box"><div class="r"><span>Product B (cheese)</span><span class="tag warn">Insufficient info</span></div><div class="sub" style="margin-top:4px">Gluten status could not be verified. Not considered safe.</div></div>
+<div class="box"><div class="r"><span>Product C (bread)</span><span class="tag no">Not suitable</span></div><div class="sub" style="margin-top:4px">Contains gluten.</div></div>
+<div class="btn btn-p">Suggest alternative</div></div></div><div class="step"><div class="num">5</div><h3>Build your list</h3><p>A shopping list and budget tracking are prepared from the ingredients.</p><div class="scr" role="img" aria-label="Sample app screen: Build your list"><div class="t">Shopping list</div><div class="sub">Built from suitable products</div>
+<div class="box"><span class="chk on"></span>Product A · eggs</div>
+<div class="box"><span class="chk"></span>Product D · rice</div>
+<div class="box"><span class="chk"></span>Product E · lentils</div>
+<div class="box"><span class="chk"></span>Product F · olive oil</div>
+<div class="box"><div class="r"><span class="sub">Budget used</span><b>62%</b></div><div class="bar" style="margin-top:6px"><i style="width:62%"></i></div></div>
+<div class="btn btn-p">Share list</div></div></div><div class="step"><div class="num">6</div><h3>Optimize your shopping</h3><p>As the platform grows, you will be able to compare verified products across supermarkets.</p><div class="scr" role="img" aria-label="Sample app screen: Optimize your shopping"><div class="t">Store comparison</div><div class="sub"><span class="tag warn">Next stage</span></div>
+<div class="box lock"><div class="r"><b>Store 1</b><span class="sub">price · stock</span></div></div>
+<div class="box lock"><div class="r"><b>Store 2</b><span class="sub">price · stock</span></div></div>
+<div class="box lock"><div class="r"><b>Store 3</b><span class="sub">price · stock</span></div></div>
+<div class="sub" style="text-align:center;margin-top:6px">Live price and stock data requires partnerships with supermarkets.</div>
+<div class="btn btn-s" style="margin-top:auto">Coming soon</div></div></div></div><p class="demo">Screens are concept designs; product names and values are samples.</p></div></div></section>
+
+<section class="sec alt" id="operasyon"><div class="wrap">
+<div class="eyebrow">Behind the scenes</div>
+<h2 style="max-width:720px">How do we run the business?</h2>
+<div class="g5">
+<div class="card"><div class="num">1</div><h3 style="font-size:18px">Product data</h3><p>Collecting ingredient and allergen declarations, checking sources, and flagging missing or outdated information.</p></div>
+<div class="card"><div class="num">2</div><h3 style="font-size:18px">Recipes and planning</h3><p>Curating gluten-free recipes, matching them with profiles, and calculating quantities and costs.</p></div>
+<div class="card"><div class="num">3</div><h3 style="font-size:18px">Technology</h3><p>Developing the app, the database and the matching system.</p></div>
+<div class="card"><div class="num">4</div><h3 style="font-size:18px">Store connections</h3><p>Gathering product and price information, and building partnerships with supermarkets and suppliers.</p></div>
+<div class="card"><div class="num">5</div><h3 style="font-size:18px">Support and quality</h3><p>Reviewing user reports and keeping data transparent.</p></div>
+</div>
+<p class="lead" style="max-width:none"><b>Partners:</b> food manufacturers, supermarkets, dietitians, celiac associations, technology providers. <b>Resources:</b> product and recipe database, software infrastructure, experts who review food information.</p>
+</div></section>
+
+<section class="sec" id="musteri"><div class="wrap">
+<div class="eyebrow">Who is it for?</div>
+<h2 style="max-width:720px">Families living with a celiac family member.</h2>
+<div class="g3">
+<div class="card"><span class="tag ok">Primary target</span><h3>Families with a celiac child or spouse</h3><p>The person who handles grocery shopping and meal planning in the household. Aged 28–45, lives in Istanbul, uses a smartphone, and pays attention to food spending and product safety.</p></div>
+<div class="card"><span class="tag warn">Secondary target</span><h3>Newly diagnosed adults</h3><p>People who need help getting to know gluten-free products and planning their diet.</p></div>
+<div class="card"><span class="tag gray">Early adopters</span><h3>Istanbul first, then Türkiye</h3><p>Parents of children with celiac disease, the newly diagnosed, households with more than one dietary restriction, and people who already use online grocery and meal planning tools.</p></div>
+</div>
+</div></section>
+
+<section class="sec alt" id="veri"><div class="wrap">
+<div class="eyebrow">Market data</div>
+<h2 style="max-width:760px">A real and recurring need.</h2>
+<h3 style="margin-top:40px">Objective data</h3>
+<div class="g3" style="margin-top:20px">
+<div class="card"><div class="stat">166,614</div><p style="margin-top:12px">Number of people diagnosed with celiac disease in Türkiye (end of November 2023). At the end of 2021 this number was 138,230, an increase of about 20% in two years.</p><p class="src">Source: Republic of Türkiye Ministry of Health, Health Information Systems data; for 2023, a statement by the Zonguldak Provincial Health Director; for 2021, an NTV news report.</p></div>
+<div class="card"><div class="stat">304%</div><p style="margin-top:12px">In one study, gluten-free foods were found to be on average this much more expensive than their gluten-containing counterparts. The price data is from 2015–2016.</p><p class="src">Source: Mersin University Department of Food Engineering master's thesis (advisor: Prof. Dr. Mahir Turhan).</p></div>
+<div class="card"><div class="stat">17.5%</div><p style="margin-top:12px">In the same study, this share of the 200 products carrying a gluten-free logo exceeded the 20 mg/kg gluten limit. Verification is needed even for labelled products.</p><p class="src">Source: same thesis.</p></div>
+</div>
+<p class="lead" style="max-width:none">In addition, a study published in 2025 compared the labels of 456 packaged gluten-free and gluten-containing products sold in Türkiye in terms of price and nutritional quality (Kılınç, 2025, J Sci Food Agric, 105(15), 8798–8805).</p>
+<h3 style="margin-top:44px">Subjective data</h3>
+<div class="g3" style="margin-top:20px">
+<div class="card"><div class="stat">89%</div><p style="margin-top:12px">would log their food in the app every week</p></div>
+<div class="card"><div class="stat">89%</div><p style="margin-top:12px">spend 1+ hour a week planning gluten-free meals &amp; shopping</p></div>
+<div class="card"><div class="stat">72%</div><p style="margin-top:12px">would pay for the app; top pick: 100–149 TL/month</p></div>
+</div>
+<p class="src">Source: our own online survey of gluten-free households · respondents mostly aged 18–24, Istanbul</p>
+<h3 style="margin-top:44px">People feel the pain and want the fix</h3>
+<div class="g2" style="margin-top:20px">
+<div class="card"><p>“Finding gluten-free snacks without driving to three different specialty stores is my biggest daily frustration.”</p><p class="src">— survey respondent with celiac disease</p></div>
+<div class="card"><p>“As someone with lactose intolerance I find it difficult to find products that are both gluten-free and suitable for my dietary needs. It can be challenging to check ingredient labels and find a variety of affordable products. I would also like to have more options in restaurants and supermarkets
+
+”</p><p class="src">— survey respondent with celiac disease</p></div>
+</div>
+</div></section>
+
+<section class="sec" id="bmc"><div class="wrap">
+<div class="eyebrow">Business model</div>
+<h2 style="max-width:720px">Business Model Canvas (hypotheses).</h2>
+<div class="bmc">
+<div style="grid-area:pa"><h3>Partners</h3><p>Celiac associations, supermarkets, food manufacturers, dietitians.</p></div>
+<div style="grid-area:ac"><h3>Activities</h3><p>Product verification, recipe database, development, store connections, support.</p></div>
+<div style="grid-area:re"><h3>Resources</h3><p>Product and recipe database, software infrastructure, experts who review food information.</p></div>
+<div style="grid-area:va;background:var(--tint)"><h3>Value proposition</h3><p>A safe, affordable and effortless weekly meal plan and shopping for celiac households.</p></div>
+<div style="grid-area:cr"><h3>Customer relationships</h3><p>In-app support, user reports, transparent data warnings.</p></div>
+<div style="grid-area:ch"><h3>Channels</h3><p>Mobile app, social media, celiac associations and communities.</p></div>
+<div style="grid-area:cs"><h3>Customer segments</h3><p>Celiac households; secondarily, newly diagnosed adults.</p></div>
+<div style="grid-area:co"><h3>Cost structure</h3><p>Software development, product data verification, marketing, servers.</p></div>
+<div style="grid-area:rv"><h3>Revenue streams (hypothesis)</h3><p>Subscription or freemium; later, store referral commission.</p></div>
+</div>
+<h3 style="margin-top:56px">Hypotheses we will test</h3>
+<div class="g3" style="margin-top:20px">
+<div class="card"><span class="tag ok">Do they want it?</span><h3>Demand</h3><p>The person who does the shopping in a celiac household wants to use an app that links product suitability to the weekly plan. Test: survey and campaign interest.</p></div>
+<div class="card"><span class="tag warn">Can we do it?</span><h3>Feasibility</h3><p>Product ingredient and label information can be collected and classified with enough accuracy. Test: a manual verification trial with selected products.</p></div>
+<div class="card"><span class="tag gray">Does it create value?</span><h3>Viability</h3><p>Users are willing to pay for advanced features. Test: the willingness-to-pay question in the survey and the campaign result.</p></div>
+</div>
+</div></section>
+
+<section class="sec alt" id="destek"><div class="wrap" style="text-align:center">
+<h2 style="max-width:640px;margin:0 auto">Let's bring the project to life together.</h2>
+<p class="lead" style="margin:16px auto 0">You can support the development of Intoleria through our crowdfunding campaign.</p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px"><a class="btn btn-p" href="https://fatihkaanbostan.github.io/IntoleriaApp/" target="_blank" rel="noopener">Try demo</a><a class="btn btn-s" href="https://docs.google.com/forms/d/e/1FAIpQLSdqTYbk-l6vk7B9g9XG-NrPDdSp7vF51uU0_b89DxFHAgya1w/viewform?usp=header" target="_blank" rel="noopener">Take the survey</a></div>
+</div></section>
+
+<footer><div class="wrap">
+<p style="margin-bottom:14px"><b>Sources:</b></p>
+<ol class="refs">
+<li>Republic of Türkiye Ministry of Health, Health Information Systems data (end of 2023: statement by the Zonguldak Provincial Health Director; end of 2021: NTV news report).</li>
+<li>Mersin University, Department of Food Engineering, master's thesis (gluten analysis and price comparison of gluten-free products).</li>
+<li>Kılınç, G. E. (2025). Gluten-free foods: healthy choice or expensive alternative? What evidence is there in Turkey? Journal of the Science of Food and Agriculture, 105(15), 8798–8805. doi:10.1002/jsfa.70117</li>
+</ol>
+<p style="margin-top:18px">© Intoleria. This project does not provide medical advice; rely on product labels and your doctor's recommendations.</p>
+</div></footer>
+</body>
+</html>
